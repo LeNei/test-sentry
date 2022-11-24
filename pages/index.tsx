@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { getJsonFile } from '../util/getFile'
 
 export default function Home() {
   return (
@@ -68,4 +69,12 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const test = await getJsonFile("test");
+  console.log(test);
+  return {
+    props: {}
+  }
 }
