@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { getJsonFile } from '../util/getFile'
 
-export default function Home() {
+export default function Home({ data }: any) {
+  console.log(data);
   return (
     <div className={styles.container}>
       <Head>
@@ -72,9 +72,11 @@ export default function Home() {
 }
 
 export async function getServerSideProps() {
-  const test = await getJsonFile("test");
-  console.log(test);
+  const test = await fetch("http://localhost:3000/api/testJson");
+  const data = await test.json();
   return {
-    props: {}
+    props: {
+      data
+    }
   }
 }
