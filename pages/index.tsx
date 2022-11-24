@@ -72,11 +72,19 @@ export default function Home({ data }: any) {
 }
 
 export async function getServerSideProps() {
-  const data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
-    .then(response => response.json())
-  return {
-    props: {
-      data
+  try {
+    const test = await fetch("http://localhost:3000/api/testJson");
+    const data = await test.json();
+    return {
+      props: {
+        data
+      }
+    }
+  } catch (e) {
+    return {
+      props: {
+        data: e
+      }
     }
   }
 }
